@@ -5,6 +5,7 @@ function App() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [lastJoke, setLastJoke] = useState(null); // Track the last joke
+  const [talkTo, setTalkTo] = useState('Dad'); // Track who the user is talking to
 
   const handleSend = () => {
     if (input.trim() === '') return;
@@ -13,10 +14,10 @@ function App() {
     const userMessage = { sender: 'You', text: input };
     setMessages((prev) => [...prev, userMessage]);
 
-    // Generate dad response
-    const dadResponse = generateDadResponse(input);
-    const dadMessage = { sender: 'Dad', text: dadResponse };
-    setMessages((prev) => [...prev, dadMessage]);
+    // Generate response
+    const response = talkTo === 'Dad' ? generateDadResponse(input) : generateMomResponse(input);
+    const responseMessage = { sender: talkTo, text: response };
+    setMessages((prev) => [...prev, responseMessage]);
 
     setInput('');
   };
@@ -72,12 +73,53 @@ function App() {
     return response;
   };
 
+  const generateMomResponse = (userInput) => {
+    const encouragements = [
+      "You're doing great, sweetie!",
+      "Don't forget to take breaks and rest.",
+      "I'm so proud of you!",
+      "Remember, you can achieve anything you set your mind to.",
+      "Always believe in yourself.",
+    ];
+
+    const tips = [
+      "Keep your workspace tidy for better focus.",
+      "A good night's sleep is the key to productivity.",
+      "Don't forget to eat your vegetables!",
+      "Always be kind to others.",
+      "Stay organized and plan ahead.",
+    ];
+
+    const funFacts = [
+      "Did you know? A baby kangaroo is called a joey.",
+      "Butterflies can taste with their feet.",
+      "The moon has moonquakes.",
+      "A group of kittens is called a kindle.",
+      "Tomatoes are fruits, not vegetables.",
+    ];
+
+    // Randomly choose a response type
+    const responseTypes = ['encouragement', 'tip', 'funFact'];
+    const responseType = responseTypes[Math.floor(Math.random() * responseTypes.length)];
+
+    let response;
+    if (responseType === 'encouragement') {
+      response = `Here's some mom encouragement: ${encouragements[Math.floor(Math.random() * encouragements.length)]}`;
+    } else if (responseType === 'tip') {
+      response = `Here's a mom tip: ${tips[Math.floor(Math.random() * tips.length)]}`;
+    } else if (responseType === 'funFact') {
+      response = `Fun fact: ${funFacts[Math.floor(Math.random() * funFacts.length)]}`;
+    }
+
+    return response;
+  };
+
   return (
     <div className="App">
-      <h1>Dad Talker</h1>
+      <h1>Parent Talker</h1>
       <div className="chat-box">
         {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.sender === 'Dad' ? 'dad' : 'user'}`}>
+          <div key={index} className={`message ${msg.sender === talkTo ? 'parent' : 'user'}`}>
             <strong>{msg.sender}:</strong> {msg.text}
           </div>
         ))}
@@ -91,6 +133,15 @@ function App() {
         />
         <button onClick={handleSend}>Send</button>
         <button onClick={handleReset} style={{ marginLeft: '10px' }}>Reset</button>
+      </div>
+      <div className="toggle-box">
+        <label>
+          Talk to:
+          <select value={talkTo} onChange={(e) => setTalkTo(e.target.value)} style={{ marginLeft: '10px' }}>
+            <option value="Dad">Dad</option>
+            <option value="Mom">Mom</option>
+          </select>
+        </label>
       </div>
     </div>
   );
