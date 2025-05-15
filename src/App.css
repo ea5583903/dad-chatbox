@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  color: tan;
 }
 
 .App-logo {
@@ -35,4 +38,51 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.chat-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin: 5px 0;
+}
+
+.message.dad {
+  color: blue;
+}
+
+.message.user {
+  color: green;
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
