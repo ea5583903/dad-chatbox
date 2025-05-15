@@ -83,6 +83,7 @@ function App() {
       "The moon has moonquakes.",
       "A group of kittens is called a kindle.",
       "Tomatoes are fruits, not vegetables.",
+      "i HATE YOU!"
     ];
 
     // Filter out used responses
