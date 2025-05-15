@@ -21,6 +21,12 @@ function App() {
     setInput('');
   };
 
+  const handleReset = () => {
+    setMessages([]); // Clear all messages
+    setInput(''); // Reset input field
+    setLastJoke(null); // Reset last joke
+  };
+
   const generateDadResponse = (userInput) => {
     const jokes = [
       "I'm afraid for the calendar. Its days are numbered.",
@@ -84,6 +90,7 @@ function App() {
           placeholder="Type your message..."
         />
         <button onClick={handleSend}>Send</button>
+        <button onClick={handleReset} style={{ marginLeft: '10px' }}>Reset</button>
       </div>
     </div>
   );
