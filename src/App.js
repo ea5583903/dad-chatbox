@@ -30,24 +30,40 @@ function App() {
       "What did the ocean say to the beach? Nothing, it just waved.",
     ];
 
-    // Filter out the last joke
-    const filteredJokes = jokes.filter((joke) => joke !== lastJoke);
-
-    // Select a new joke
-    const newJoke = filteredJokes[Math.floor(Math.random() * filteredJokes.length)];
-    setLastJoke(newJoke); // Update the last joke
-
-    // Acknowledge the user's input
-    const acknowledgments = [
-      "That's interesting!",
-      "Oh, really?",
-      "Good one!",
-      "Haha, I see what you did there.",
-      "Hmm, let me think about that.",
+    const advice = [
+      "Always remember to stay hydrated.",
+      "Don't forget to call your mom.",
+      "Measure twice, cut once.",
+      "If something's worth doing, it's worth doing right.",
+      "Never trust a ladder. They're always up to something.",
     ];
 
-    const acknowledgment = acknowledgments[Math.floor(Math.random() * acknowledgments.length)];
-    return `${acknowledgment} Here's a dad joke for you: ${newJoke}`;
+    const funFacts = [
+      "Did you know? Honey never spoils.",
+      "Bananas are berries, but strawberries aren't.",
+      "Octopuses have three hearts.",
+      "A group of flamingos is called a 'flamboyance.'",
+      "The Eiffel Tower can be 15 cm taller during the summer.",
+    ];
+
+    // Randomly choose a response type
+    const responseTypes = ['joke', 'advice', 'funFact'];
+    const responseType = responseTypes[Math.floor(Math.random() * responseTypes.length)];
+
+    let response;
+    if (responseType === 'joke') {
+      // Filter out the last joke
+      const filteredJokes = jokes.filter((joke) => joke !== lastJoke);
+      const newJoke = filteredJokes[Math.floor(Math.random() * filteredJokes.length)];
+      setLastJoke(newJoke); // Update the last joke
+      response = `Here's a dad joke for you: ${newJoke}`;
+    } else if (responseType === 'advice') {
+      response = `Here's some dad advice: ${advice[Math.floor(Math.random() * advice.length)]}`;
+    } else if (responseType === 'funFact') {
+      response = `Fun fact: ${funFacts[Math.floor(Math.random() * funFacts.length)]}`;
+    }
+
+    return response;
   };
 
   return (
